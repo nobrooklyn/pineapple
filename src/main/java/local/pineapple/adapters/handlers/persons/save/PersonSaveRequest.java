@@ -1,4 +1,4 @@
-package local.pineapple.adapters.handlers.persons.add;
+package local.pineapple.adapters.handlers.persons.save;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @JsonDeserialize
-class PersonAddRequest implements HandlerRequest {
+class PersonSaveRequest implements HandlerRequest {
 	private String id;
 	private String givenName;
 	private String familyName;

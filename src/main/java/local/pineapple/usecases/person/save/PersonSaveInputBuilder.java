@@ -1,4 +1,4 @@
-package local.pineapple.usecases.person.add;
+package local.pineapple.usecases.person.save;
 
 import java.time.LocalDate;
 
@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Getter(value = AccessLevel.PACKAGE)
 @Setter
 @Accessors(chain = true, fluent = true)
-public class PersonAddInputBuilder implements UseCaseInputBuilder<PersonAddInput> {
+public class PersonSaveInputBuilder implements UseCaseInputBuilder<PersonSaveInput> {
 	private String id;
 	private String givenName;
 	private String familyName;
@@ -26,13 +26,13 @@ public class PersonAddInputBuilder implements UseCaseInputBuilder<PersonAddInput
 	private String bloodType;
 
 	@Override
-	public PersonAddInput build() {
-		var violations = new PersonAddInputValidator().validate(this);
+	public PersonSaveInput build() {
+		var violations = new PersonSaveInputValidator().validate(this);
 		if (!violations.isEmpty()) {
 			throw new ConstraintViolationException(violations);
 		}
 
-		return new PersonAddInput(Person.builder() //
+		return new PersonSaveInput(Person.builder() //
 				.id(id) //
 				.givenName(givenName).familyName(familyName) //
 				.birthDay(LocalDate.of(intVal(birthYear), intVal(birthMonth), intVal(birthDay))) //

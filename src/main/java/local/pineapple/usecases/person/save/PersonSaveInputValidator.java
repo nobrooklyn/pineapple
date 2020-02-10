@@ -1,4 +1,4 @@
-package local.pineapple.usecases.person.add;
+package local.pineapple.usecases.person.save;
 
 import static local.pineapple.global.validators.Validator.isInteger;
 import static local.pineapple.global.validators.Validator.isNotBlank;
@@ -13,10 +13,10 @@ import local.pineapple.domain.model.person.Sex;
 import local.pineapple.global.validators.ConstraintViolation;
 import local.pineapple.usecases.core.UseCaseInputValidator;
 
-class PersonAddInputValidator extends UseCaseInputValidator<PersonAddInputBuilder> {
+class PersonSaveInputValidator extends UseCaseInputValidator<PersonSaveInputBuilder> {
 
 	@Override
-	protected void validateInternal(PersonAddInputBuilder input, Set<ConstraintViolation> violations) {
+	protected void validateInternal(PersonSaveInputBuilder input, Set<ConstraintViolation> violations) {
 		violations.addAll(Name.validate(input.givenName(), input.familyName()));
 
 		var birthYearResult = validateBirthX("birthYear", input.birthYear());

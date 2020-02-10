@@ -1,4 +1,4 @@
-package local.pineapple.adapters.handlers.persons.add;
+package local.pineapple.adapters.handlers.persons.save;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
@@ -7,29 +7,29 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import local.pineapple.usecases.person.add.PersonAddUseCase;
+import local.pineapple.usecases.person.save.PersonSaveUseCase;
 import reactor.core.publisher.Mono;
 
 @Component
-public class PersonAddHandler {
-	private final PersonAddUseCase useCase;;
+public class PersonSaveHandler {
+	private final PersonSaveUseCase useCase;;
 
-	private final PersonAddPresenter presenter;
+	private final PersonSavePresenter presenter;
 
 	@Autowired
-	PersonAddHandler(PersonAddUseCase useCase, PersonAddPresenter presenter) {
+	PersonSaveHandler(PersonSaveUseCase useCase, PersonSavePresenter presenter) {
 		this.useCase = useCase;
 		this.presenter = presenter;
 	}
 
-	public Mono<ServerResponse> add(final ServerRequest req) {
-		Mono<PersonAddResponse> res = req.bodyToMono(PersonAddRequest.class) //
+	public Mono<ServerResponse> save(final ServerRequest req) {
+		Mono<PersonSaveResponse> res = req.bodyToMono(PersonSaveRequest.class) //
 				.map(r -> personId(req) == null ? r : r.setId(personId(req))) //
-				.map(r -> presenter.personAddInput(r)) //
+				.map(r -> presenter.personSaveInput(r)) //
 				.flatMap(in -> useCase.handle(Mono.just(in))) //
-				.map(out -> presenter.personAddResponse(out));
+				.map(out -> presenter.personSaveResponse(out));
 
-		return ok().body(res, PersonAddResponse.class);
+		return ok().body(res, PersonSaveResponse.class);
 	}
 
 	private String personId(ServerRequest req) {

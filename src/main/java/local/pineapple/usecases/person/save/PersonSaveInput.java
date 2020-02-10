@@ -1,4 +1,4 @@
-package local.pineapple.usecases.person.add;
+package local.pineapple.usecases.person.save;
 
 import local.pineapple.domain.model.person.Person;
 import local.pineapple.usecases.core.UseCaseInput;
@@ -14,10 +14,10 @@ import lombok.experimental.Accessors;
 @ToString
 @EqualsAndHashCode
 @Accessors(fluent = true)
-public class PersonAddInput implements UseCaseInput {
+public class PersonSaveInput implements UseCaseInput {
 	private final Person person;
 
-	public static PersonAddInputBuilder builder() {
-		return new PersonAddInputBuilder();
+	public static PersonSaveInputBuilder builder() {
+		return new PersonSaveInputBuilder();
 	}
 }

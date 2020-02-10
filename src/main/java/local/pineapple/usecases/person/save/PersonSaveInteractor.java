@@ -1,4 +1,4 @@
-package local.pineapple.usecases.person.add;
+package local.pineapple.usecases.person.save;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,19 +9,19 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class PersonAddInteractor implements PersonAddUseCase {
+public class PersonSaveInteractor implements PersonSaveUseCase {
 	private PersonRepository repository;
 
 	@Autowired
-	public PersonAddInteractor(PersonRepository repository) {
+	public PersonSaveInteractor(PersonRepository repository) {
 		this.repository = repository;
 	}
 
 	@Override
-	public Mono<PersonAddOutput> handle(Mono<PersonAddInput> input) {
+	public Mono<PersonSaveOutput> handle(Mono<PersonSaveInput> input) {
 		return input.map(in -> in.person()) //
 				.flatMap(p -> repository.save(p)) //
-				.map(p -> new PersonAddOutput(p.id().value())) //
+				.map(p -> new PersonSaveOutput(p.id().value())) //
 				.doOnSuccess(out -> log.info("saved a person. {}", out.id())) //
 				.doOnError(e -> log.error("can't save.", e));
 	}
