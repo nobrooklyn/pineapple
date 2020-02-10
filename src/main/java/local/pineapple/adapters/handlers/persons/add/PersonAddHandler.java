@@ -24,10 +24,15 @@ public class PersonAddHandler {
 
 	public Mono<ServerResponse> add(final ServerRequest req) {
 		Mono<PersonAddResponse> res = req.bodyToMono(PersonAddRequest.class) //
+				.map(r -> personId(req) == null ? r : r.setId(personId(req))) //
 				.map(r -> presenter.personAddInput(r)) //
 				.flatMap(in -> useCase.handle(Mono.just(in))) //
 				.map(out -> presenter.personAddResponse(out));
 
 		return ok().body(res, PersonAddResponse.class);
+	}
+
+	private String personId(ServerRequest req) {
+		return req.pathVariables().get("id");
 	}
 }

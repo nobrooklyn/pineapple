@@ -16,6 +16,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true, fluent = true)
 public class PersonAddInputBuilder implements UseCaseInputBuilder<PersonAddInput> {
+	private String id;
 	private String givenName;
 	private String familyName;
 	private String birthYear;
@@ -32,10 +33,12 @@ public class PersonAddInputBuilder implements UseCaseInputBuilder<PersonAddInput
 		}
 
 		return new PersonAddInput(Person.builder() //
+				.id(id) //
 				.givenName(givenName).familyName(familyName) //
 				.birthDay(LocalDate.of(intVal(birthYear), intVal(birthMonth), intVal(birthDay))) //
 				.sexCode(intVal(sex)) //
-				.bloodType(bloodType).buildNew());
+				.bloodType(bloodType) //
+				.buildNewOrExist());
 	}
 
 }

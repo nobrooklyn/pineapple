@@ -25,6 +25,10 @@ public class PersonBuilder {
 	private int sexCode;
 	private String bloodType;
 
+	public Person buildNewOrExist() {
+		return id == null ? buildNew() : buildExist();
+	}
+
 	public Person buildNew() {
 
 		var violations = validateAttributes();

@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import local.pineapple.adapters.handlers.core.HandlerRequest;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 @JsonDeserialize
 class PersonAddRequest implements HandlerRequest {
+	private String id;
 	private String givenName;
 	private String familyName;
 	private String birthYear;

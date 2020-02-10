@@ -9,6 +9,7 @@ import local.pineapple.usecases.person.add.PersonAddOutput;
 class PersonAddPresenter {
 	PersonAddInput personAddInput(PersonAddRequest req) {
 		return PersonAddInput.builder() //
+				.id(req.getId()) //
 				.givenName(req.getGivenName()) //
 				.familyName(req.getFamilyName()) //
 				.birthYear(req.getBirthYear()).birthMonth(req.getBirthMonth()).birthDay(req.getBirthDay()) //

@@ -19,13 +19,13 @@ public class PersonListInteractor implements PersonListUseCase {
 	public Flux<PersonListOutput> handle(Mono<PersonListInput> input) {
 		PersonQueryRequest req = new PersonQueryRequest();
 
-		return Flux.fromStream(query.find(req).stream().map(res -> PersonListOutput.builder()//
+		return query.find(req).map(res -> PersonListOutput.builder()//
 				.id(res.id()) //
 				.givenName(res.givenName()) //
 				.familyName(res.familyName()) //
 				.birthday(res.birthday()) //
 				.sexCode(res.sex()) //
-				.bloodType(res.bloodType()).build()));
+				.bloodType(res.bloodType()) //
+				.build());
 	}
-
 }

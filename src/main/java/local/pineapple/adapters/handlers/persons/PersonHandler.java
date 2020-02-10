@@ -24,7 +24,8 @@ public class PersonHandler {
 		return RouterFunctions.route().path("/persons", builder -> {
 			builder.GET("/", listHandler::list) //
 					// .GET("/{personId}", this::find) //
-					.POST("/", addHandler::add);
+					.POST("/", addHandler::add) //
+					.POST("/{id}", addHandler::add);
 		}).build();
 	}
 }

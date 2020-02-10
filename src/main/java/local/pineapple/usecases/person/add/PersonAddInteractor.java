@@ -20,7 +20,7 @@ public class PersonAddInteractor implements PersonAddUseCase {
 	@Override
 	public Mono<PersonAddOutput> handle(Mono<PersonAddInput> input) {
 		return input.map(in -> in.person()) //
-				.map(p -> repository.save(p)) //
+				.flatMap(p -> repository.save(p)) //
 				.map(p -> new PersonAddOutput(p.id().value())) //
 				.doOnSuccess(out -> log.info("saved a person. {}", out.id())) //
 				.doOnError(e -> log.error("can't save.", e));

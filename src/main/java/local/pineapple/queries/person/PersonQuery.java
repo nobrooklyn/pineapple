@@ -1,7 +1,7 @@
 package local.pineapple.queries.person;
 
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface PersonQuery {
-	List<PersonQueryResponse> find(PersonQueryRequest req);
+	Flux<PersonQueryResponse> find(PersonQueryRequest req);
 }
